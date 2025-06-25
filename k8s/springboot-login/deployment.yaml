@@ -17,7 +17,7 @@ spec:
       serviceAccountName: springboot-login-sa
       containers:
         - name: springboot-login-container
-          image: bala1213/springboot-login-app:v1
+          image: bala1213/springboot-login-app:v2
           ports:
             - containerPort: 8080
           volumeMounts:
