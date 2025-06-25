@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springboot-login-deployment
+  labels:
+    app: springboot-login
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: springboot-login
+  template:
+    metadata:
+      labels:
+        app: springboot-login
+    spec:
+      serviceAccountName: springboot-login-sa
+      containers:
+        - name: springboot-login-container
+          image: bala1213/springboot-login-app:v1
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: login-storage
+              mountPath: /data
+          imagePullPolicy: Always
+      volumes:
+        - name: login-storage
+          persistentVolumeClaim:
+            claimName: login-pvc
